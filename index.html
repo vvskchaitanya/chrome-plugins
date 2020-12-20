@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Chrome Automation</title>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <!--<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+  <style>
+  .btn-primary:disabled{
+  cursor:not-allowed;
+  opacity:0.5;
+  }
+  </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+	<a class="navbar-brand" href="#">Chrome Automation</a>
+	</nav>
+	<div id="app" class="container" style="margin-top:100px">
+	<div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Website Credentials</span>
+    </div>
+    <input type="text" v-model="uname" class="form-control" placeholder="Username">
+	<input type="password" v-model="pwd" class="form-control" placeholder="Password">
+  </div>
+	<div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Project URL  Excel File</span>
+    </div>
+    <input type="file" class="form-control" @change="processURLFile($event)" placeholder="Choose File">
+	
+  </div>
+  <span class="text-success" v-if="urls.length>0">{{urls.length}} URLS loaded</span>
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Project Proposal Excel File</span>
+    </div>
+    <input type="file" class="form-control" @change="processProjectFile($event)" placeholder="Choose File">
+  </div>
+  <span class="text-success" v-if="prjs.length>0">{{prjs.length}} Project Proposals loaded</span>
+  <div class="text-center">
+  <input type="checkbox" class="mx-2" v-model="placeBid" />Place Bid<br/>
+  <button @click="submit()" :disabled="uname=='' || pwd=='' || urls.length==0 || urls.length!=prjs.length" class="btn btn-primary">Submit</button></div>
+	</div>
+	<script src="index.js">
+	</script>
+  </body>
+</html>
